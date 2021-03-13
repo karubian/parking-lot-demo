@@ -8,4 +8,7 @@ import com.huawei.parkinglot.entity.vehicle.Vehicle;
 public interface VehicleService {
 
 	void checkOut(Vehicle vehicle);
+
+	void checkIn(Vehicle vehicle);
+
 }

@@ -1,9 +1,10 @@
 package com.huawei.parkinglot.entity.vehicle;
 
-import javax.persistence.Entity;
+import lombok.Data;
+
 import javax.persistence.Table;
 
-@Entity
+@Data
 @Table(name = "vehicle")
 //TODO define inheritance
 public class Sedan extends Vehicle{
