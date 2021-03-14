@@ -1,14 +1,23 @@
 package com.huawei.parkinglot.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
 
+
 @Data
 @Table
+@Entity
+@NoArgsConstructor
 public class ParkingArea {
-	//TODO define attributes
+
+    public ParkingArea(String name, int capacity, String city) {
+        this.name = name;
+        this.capacity = capacity;
+        this.city = city;
+    }
 
     @Id
     private String name;
@@ -19,5 +28,7 @@ public class ParkingArea {
 
     @OneToMany(mappedBy = "parkingArea",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<PriceData> priceList;
+
+
 
 }
