@@ -41,7 +41,7 @@ public class PriceData {
     private int price;
 
     @ManyToOne(fetch = FetchType.LAZY,optional = false)
-    @JoinColumn(name = "name",nullable = false)
+    @JoinColumn(name = "parking_area_id",nullable = false)
     @JsonIgnore
     private ParkingArea parkingArea;
 

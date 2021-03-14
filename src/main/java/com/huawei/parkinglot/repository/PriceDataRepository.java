@@ -11,5 +11,5 @@ import java.util.List;
 @Repository
 public interface PriceDataRepository extends CrudRepository<PriceData,Long> {
 
-    List<PriceData> findByParkingArea(ParkingArea parkingArea, Sort sort);
+    List<PriceData> findByParkingArea(ParkingArea parkingArea);
 }

@@ -24,6 +24,11 @@ public class ParkingAreaValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         ParkingArea parkingArea = (ParkingArea) o;
+
+        if(parkingArea.getPriceList() == null || parkingArea.getPriceList().isEmpty()) {
+            errors.reject("Price list must be defined.");
+        }
+
         RangeSet<Integer> rangeSet = TreeRangeSet.create();
 
         parkingArea.getPriceList().stream().forEach(e -> {

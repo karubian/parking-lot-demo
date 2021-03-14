@@ -19,7 +19,7 @@ public class ParkinglotApplication {
         SpringApplication.run(ParkinglotApplication.class, args);
     }
 
-    @Bean
+/*    @Bean
     public CommandLineRunner mappingDemo(ParkingAreaRepository parkingAreaRepository,
                                          PriceDataRepository priceDataRepository) {
         return args -> {
@@ -33,5 +33,5 @@ public class ParkinglotApplication {
             System.out.println(result.size());
 
         };
-    }
+    }*/
 }
