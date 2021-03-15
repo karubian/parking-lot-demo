@@ -1,12 +1,10 @@
-package com.huawei.parkinglot.service;
+package com.huawei.parkinglot.service.parking;
 
-import com.huawei.parkinglot.entity.ParkingArea;
-import com.huawei.parkinglot.entity.PriceData;
+import com.huawei.parkinglot.entity.parking.ParkingArea;
 import com.huawei.parkinglot.repository.ParkingAreaRepository;
 import com.huawei.parkinglot.repository.PriceDataRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,7 +20,7 @@ public class ParkingAreaServiceImpl implements ParkingAreaService {
 
     @Override
     public void createParkingArea(ParkingArea parkingArea) {
-        parkingArea.getPriceList().forEach(e -> e.setParkingArea(parkingArea));
+        //parkingArea.getPriceList().forEach(e -> e.setParkingArea(parkingArea));
         parkingAreaRepository.save(parkingArea);
     }
 
@@ -32,13 +30,6 @@ public class ParkingAreaServiceImpl implements ParkingAreaService {
 
         if (parkingAreaOptional.isPresent()) {
             parkingArea.setId(id);
-
-            List<PriceData> oldPriceData = priceDataRepository.findByParkingArea(parkingAreaOptional.get());
-            oldPriceData.forEach(e -> priceDataRepository.delete(e));
-            parkingArea.getPriceList().forEach(e -> {
-                e.setParkingArea(parkingArea);
-                //priceDataRepository.save(e);
-            });
 
             parkingAreaRepository.save(parkingArea);
         }

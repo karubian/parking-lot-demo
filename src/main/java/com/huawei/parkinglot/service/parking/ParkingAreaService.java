@@ -1,7 +1,7 @@
-package com.huawei.parkinglot.service;
+package com.huawei.parkinglot.service.parking;
 
 
-import com.huawei.parkinglot.entity.ParkingArea;
+import com.huawei.parkinglot.entity.parking.ParkingArea;
 
 public interface ParkingAreaService {
 

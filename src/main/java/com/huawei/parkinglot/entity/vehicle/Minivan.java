@@ -2,11 +2,10 @@ package com.huawei.parkinglot.entity.vehicle;
 
 import lombok.Data;
 
-import javax.persistence.Table;
+import javax.persistence.Entity;
 
 @Data
-@Table(name = "vehicle")
-//TODO define inheritance
-public class Minivan extends Vehicle{
+@Entity
+public class Minivan extends Vehicle {
 
 }

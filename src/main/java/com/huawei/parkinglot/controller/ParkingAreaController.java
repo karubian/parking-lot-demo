@@ -1,15 +1,17 @@
 package com.huawei.parkinglot.controller;
 
-import com.huawei.parkinglot.dto.ParkingRecordDto;
-import com.huawei.parkinglot.entity.ParkingArea;
-import com.huawei.parkinglot.service.ParkingAreaService;
-import com.huawei.parkinglot.service.ParkingRecordService;
+import com.huawei.parkinglot.entity.parking.ParkingArea;
+import com.huawei.parkinglot.entity.vehicle.Vehicle;
+import com.huawei.parkinglot.service.parking.ParkingAreaService;
+import com.huawei.parkinglot.service.parking.ParkingRecordService;
+import com.huawei.parkinglot.service.vehicle.VehicleService;
 import com.huawei.parkinglot.validation.ParkingAreaValidator;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 
 @RestController
 public class ParkingAreaController {
@@ -17,11 +19,13 @@ public class ParkingAreaController {
     ParkingAreaService parkingAreaService;
     ParkingAreaValidator parkingAreaValidator;
     ParkingRecordService parkingRecordService;
+    VehicleService vehicleService;
 
-    public ParkingAreaController(ParkingAreaService parkingAreaService, ParkingAreaValidator parkingAreaValidator, ParkingRecordService parkingRecordService) {
+    public ParkingAreaController(ParkingAreaService parkingAreaService, ParkingAreaValidator parkingAreaValidator, ParkingRecordService parkingRecordService,VehicleService vehicleService) {
         this.parkingAreaService = parkingAreaService;
         this.parkingAreaValidator = parkingAreaValidator;
         this.parkingRecordService = parkingRecordService;
+        this.vehicleService = vehicleService;
     }
 
     @InitBinder
@@ -30,7 +34,7 @@ public class ParkingAreaController {
     }
 
     @PostMapping(value = "/parkingArea", consumes = "application/json", headers = "content-type=application/json")
-    public  String addParkingArea(@Valid @RequestBody ParkingArea parkingArea, BindingResult bindingResult) {
+    public String addParkingArea(@Valid @RequestBody ParkingArea parkingArea, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return bindingResult.getAllErrors().get(0).getCode();
         }
@@ -46,7 +50,7 @@ public class ParkingAreaController {
             return bindingResult.getAllErrors().get(0).getCode();
         }
 
-        parkingAreaService.updateParkingArea(parkingArea,id);
+        parkingAreaService.updateParkingArea(parkingArea, id);
         return "success";
 
     }
@@ -59,8 +63,17 @@ public class ParkingAreaController {
 
     }
 
-    @PostMapping(value = "/checkIn", consumes = "application/json", headers = "content-type=application/json")
-    public String checkIn(@Valid @RequestBody ParkingRecordDto parkingRecordDto) {
-        parkingRecordService.checkIn(parkingRecordDto);
+    @PostMapping(value = "/checkIn/{parkingAreaId}", consumes = "application/json", headers = "content-type=application/json")
+    public String checkIn(@RequestBody @Valid Vehicle vehicle, @PathVariable Long parkingAreaId) {
+        parkingRecordService.checkIn(LocalDateTime.now(), vehicle, parkingAreaId);
+
+        return "a";
+    }
+
+    @PostMapping(value = "/checkOut/{vehicleId}", consumes = "application/json", headers = "content-type=application/json")
+    public String checkOut(@PathVariable Long vehicleId) {
+        //vehicleService.checkOut();
+
+        return "a";
     }
 }

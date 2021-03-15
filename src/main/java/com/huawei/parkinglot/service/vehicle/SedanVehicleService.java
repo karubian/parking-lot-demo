@@ -1,4 +1,4 @@
-package com.huawei.parkinglot.service;
+package com.huawei.parkinglot.service.vehicle;
 
 import com.huawei.parkinglot.entity.vehicle.Vehicle;
 

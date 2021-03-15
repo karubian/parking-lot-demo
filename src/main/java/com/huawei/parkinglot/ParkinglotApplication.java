@@ -1,16 +1,7 @@
 package com.huawei.parkinglot;
 
-import com.huawei.parkinglot.entity.ParkingArea;
-import com.huawei.parkinglot.entity.PriceData;
-import com.huawei.parkinglot.repository.ParkingAreaRepository;
-import com.huawei.parkinglot.repository.PriceDataRepository;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.data.domain.Sort;
-
-import java.util.List;
 
 @SpringBootApplication
 public class ParkinglotApplication {

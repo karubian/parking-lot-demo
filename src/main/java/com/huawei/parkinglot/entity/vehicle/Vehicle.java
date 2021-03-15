@@ -1,23 +1,34 @@
 package com.huawei.parkinglot.entity.vehicle;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.huawei.parkinglot.entity.ParkingArea;
-import com.huawei.parkinglot.entity.ParkingRecord;
+import com.huawei.parkinglot.entity.parking.ParkingRecord;
+import com.huawei.parkinglot.repository.ParkingRecordRepository;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Data
 @Entity
-@Table(name = "vehicle")
-//TODO define inheritance
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "vehicleType")
 public class Vehicle {
 
-	@Id
-	private String licensePlate;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@OneToOne
-	@JoinColumn(name = "parking_record_id",nullable = false)
-	@JsonIgnore
-	private ParkingRecord parkingRecord;
+    @NotNull
+    @Column(unique = true)
+    private String licensePlate;
+
+    @NotNull
+    private VehicleType type;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<ParkingRecord> parkingRecords;
+
+    @Transient
+    private ParkingRecord activeParkingRecord;
+
 }

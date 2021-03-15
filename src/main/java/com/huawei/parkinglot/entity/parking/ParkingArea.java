@@ -1,9 +1,10 @@
-package com.huawei.parkinglot.entity;
+package com.huawei.parkinglot.entity.parking;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 
@@ -26,13 +27,24 @@ public class ParkingArea {
     @Column(unique=true)
     private String name;
 
+    @NotNull
     private int capacity;
 
+    @Transient
+    private int remainingCapacity;
+
+    @NotNull
     private String city;
 
-    @OneToMany(mappedBy = "parkingArea",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<PriceData> priceList;
 
+    @OneToMany(mappedBy = "parkingArea",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private List<ParkingRecord> parkingRecords;
 
 
+    public boolean isFull() {
+        return remainingCapacity > 0;
+    }
 }

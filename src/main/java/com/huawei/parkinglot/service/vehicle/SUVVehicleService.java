@@ -1,8 +1,9 @@
-package com.huawei.parkinglot.service;
+package com.huawei.parkinglot.service.vehicle;
 
 import com.huawei.parkinglot.entity.vehicle.Vehicle;
 
-public class MinivanVehicleService implements VehicleService{
+public class SUVVehicleService  implements VehicleService{
+
     @Override
     public void checkOut(Vehicle vehicle) {
 

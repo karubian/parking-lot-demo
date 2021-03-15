@@ -1,4 +1,4 @@
-package com.huawei.parkinglot.entity;
+package com.huawei.parkinglot.entity.parking;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
@@ -16,16 +16,15 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class PriceData {
 
-    public PriceData(int startHour, int endHour, int price, ParkingArea parkingArea) {
-        this.startHour = startHour;
-        this.endHour = endHour;
-        this.price = price;
-        this.parkingArea = parkingArea;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    public PriceData(int startHour, int endHour, int price ) {
+        this.startHour = startHour;
+        this.endHour = endHour;
+        this.price = price;
+    }
 
     @NotNull
     @Min(0)
@@ -39,11 +38,6 @@ public class PriceData {
 
     @NotNull
     private int price;
-
-    @ManyToOne(fetch = FetchType.LAZY,optional = false)
-    @JoinColumn(name = "parking_area_id",nullable = false)
-    @JsonIgnore
-    private ParkingArea parkingArea;
 
 
 }

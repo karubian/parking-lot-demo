@@ -1,6 +1,6 @@
 package com.huawei.parkinglot.repository;
 
-import com.huawei.parkinglot.entity.ParkingArea;
+import com.huawei.parkinglot.entity.parking.ParkingArea;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

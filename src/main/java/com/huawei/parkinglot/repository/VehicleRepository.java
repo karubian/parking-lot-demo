@@ -1,6 +1,5 @@
 package com.huawei.parkinglot.repository;
 
-import com.huawei.parkinglot.entity.PriceData;
 import com.huawei.parkinglot.entity.vehicle.Vehicle;
 import org.springframework.data.repository.CrudRepository;
 

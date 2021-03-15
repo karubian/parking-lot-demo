@@ -3,7 +3,7 @@ package com.huawei.parkinglot.validation;
 import com.google.common.collect.Range;
 import com.google.common.collect.RangeSet;
 import com.google.common.collect.TreeRangeSet;
-import com.huawei.parkinglot.entity.ParkingArea;
+import com.huawei.parkinglot.entity.parking.ParkingArea;
 import com.huawei.parkinglot.repository.PriceDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
