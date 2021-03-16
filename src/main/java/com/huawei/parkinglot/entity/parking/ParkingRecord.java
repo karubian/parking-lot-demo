@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
+
 @Data
 @Table
 @Entity
@@ -24,12 +25,12 @@ public class ParkingRecord {
         this.vehicle = vehicle;
         this.parkingArea = parkingArea;
         this.fee = 0;
+        this.isParkingActive = true;
     }
 
     @NotNull
     private LocalDateTime inDate;
 
-    @NotNull
     private LocalDateTime outDate;
 
     @ManyToOne(fetch = FetchType.LAZY,optional = false)
@@ -43,9 +44,7 @@ public class ParkingRecord {
     @JsonIgnore
     private ParkingArea parkingArea;
 
-    private int fee;
+    private double fee;
 
-    public boolean isParkingActive() {
-        return outDate == null;
-    }
+    public boolean isParkingActive;
 }

@@ -2,16 +2,21 @@ package com.huawei.parkinglot.controller;
 
 import com.huawei.parkinglot.entity.parking.ParkingArea;
 import com.huawei.parkinglot.entity.vehicle.Vehicle;
+import com.huawei.parkinglot.exception.ParkingAreaNotFoundException;
 import com.huawei.parkinglot.service.parking.ParkingAreaService;
 import com.huawei.parkinglot.service.parking.ParkingRecordService;
-import com.huawei.parkinglot.service.vehicle.VehicleService;
 import com.huawei.parkinglot.validation.ParkingAreaValidator;
+import io.swagger.models.Response;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.ValidationException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @RestController
 public class ParkingAreaController {
@@ -19,13 +24,11 @@ public class ParkingAreaController {
     ParkingAreaService parkingAreaService;
     ParkingAreaValidator parkingAreaValidator;
     ParkingRecordService parkingRecordService;
-    VehicleService vehicleService;
 
-    public ParkingAreaController(ParkingAreaService parkingAreaService, ParkingAreaValidator parkingAreaValidator, ParkingRecordService parkingRecordService,VehicleService vehicleService) {
+    public ParkingAreaController(ParkingAreaService parkingAreaService, ParkingAreaValidator parkingAreaValidator, ParkingRecordService parkingRecordService/*VehicleService vehicleService*/) {
         this.parkingAreaService = parkingAreaService;
         this.parkingAreaValidator = parkingAreaValidator;
         this.parkingRecordService = parkingRecordService;
-        this.vehicleService = vehicleService;
     }
 
     @InitBinder
@@ -34,46 +37,41 @@ public class ParkingAreaController {
     }
 
     @PostMapping(value = "/parkingArea", consumes = "application/json", headers = "content-type=application/json")
-    public String addParkingArea(@Valid @RequestBody ParkingArea parkingArea, BindingResult bindingResult) {
+    public ParkingArea addParkingArea(@RequestBody ParkingArea parkingArea, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return bindingResult.getAllErrors().get(0).getCode();
+            throw new ValidationException();
         }
-        parkingAreaService.createParkingArea(parkingArea);
-
-        return "success";
+        return  parkingAreaService.createParkingArea(parkingArea);
 
     }
 
     @PutMapping(value = "/parkingArea/{id}", consumes = "application/json", headers = "content-type=application/json")
-    public String updateParkingArea(@Valid @RequestBody ParkingArea parkingArea, @PathVariable Long id, BindingResult bindingResult) {
+    public ParkingArea updateParkingArea(@Valid @RequestBody ParkingArea parkingArea, @PathVariable Long id, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return bindingResult.getAllErrors().get(0).getCode();
+            throw new ValidationException();
         }
-
-        parkingAreaService.updateParkingArea(parkingArea, id);
-        return "success";
+        return parkingAreaService.updateParkingArea(parkingArea, id);
 
     }
 
     @DeleteMapping(value = "/parkingArea/{id}", consumes = "application/json", headers = "content-type=application/json")
-    public String deleteParkingArea(@PathVariable Long id) {
+    public void deleteParkingArea(@PathVariable Long id) throws ParkingAreaNotFoundException {
 
         parkingAreaService.deleteParkingArea(id);
-        return "success";
 
     }
 
     @PostMapping(value = "/checkIn/{parkingAreaId}", consumes = "application/json", headers = "content-type=application/json")
-    public String checkIn(@RequestBody @Valid Vehicle vehicle, @PathVariable Long parkingAreaId) {
+    public ResponseEntity<Object> checkIn(@RequestBody Vehicle vehicle, @PathVariable Long parkingAreaId) {
         parkingRecordService.checkIn(LocalDateTime.now(), vehicle, parkingAreaId);
 
-        return "a";
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping(value = "/checkOut/{vehicleId}", consumes = "application/json", headers = "content-type=application/json")
-    public String checkOut(@PathVariable Long vehicleId) {
-        //vehicleService.checkOut();
+    public ResponseEntity<Object> checkOut(@PathVariable Long vehicleId) {
+        parkingRecordService.checkOut(vehicleId);
 
-        return "a";
+        return ResponseEntity.ok().build();
     }
 }

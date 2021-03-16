@@ -8,4 +8,8 @@ import javax.persistence.Entity;
 @Entity
 public class SUV extends Vehicle {
 
+    @Override
+    public double finalizeParkingFee(double parkingFee) {
+        return (parkingFee / 100.0) * 110;
+    }
 }

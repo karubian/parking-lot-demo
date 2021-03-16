@@ -1,7 +1,6 @@
 package com.huawei.parkinglot.entity.vehicle;
 
 import com.huawei.parkinglot.entity.parking.ParkingRecord;
-import com.huawei.parkinglot.repository.ParkingRecordRepository;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -11,8 +10,7 @@ import java.util.List;
 @Data
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "vehicleType")
-public class Vehicle {
+public abstract class Vehicle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,5 +28,7 @@ public class Vehicle {
 
     @Transient
     private ParkingRecord activeParkingRecord;
+
+    public abstract double finalizeParkingFee(double parkingFee);
 
 }

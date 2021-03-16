@@ -30,8 +30,6 @@ public class ParkingArea {
     @NotNull
     private int capacity;
 
-    @Transient
-    private int remainingCapacity;
 
     @NotNull
     private String city;
@@ -44,7 +42,4 @@ public class ParkingArea {
     private List<ParkingRecord> parkingRecords;
 
 
-    public boolean isFull() {
-        return remainingCapacity > 0;
-    }
 }

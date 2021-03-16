@@ -1,14 +1,12 @@
 package com.huawei.parkinglot.service.vehicle;
 
+import com.huawei.parkinglot.entity.parking.ParkingRecord;
 import com.huawei.parkinglot.entity.vehicle.Vehicle;
 
-/**
- * Calculations will be placed on each vehicle type
- */
+import java.util.List;
+
 public interface VehicleService {
-
-	void checkOut(Vehicle vehicle);
-
-	void checkIn(Vehicle vehicle);
+	List<ParkingRecord> getParkingDetails(Vehicle vehicle);
 
 }
+	
