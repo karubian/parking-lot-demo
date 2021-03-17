@@ -28,4 +28,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
+
+    @ExceptionHandler(value = ParkingAreaInsufficientCapacityException.class)
+    @Nullable
+    public final ResponseEntity<Object> handleParkingAreaInsufficientCapacityException(Exception ex, WebRequest request) {
+
+        return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
 }

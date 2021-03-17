@@ -16,17 +16,19 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 public class ParkingRecord {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    public ParkingRecord(@NotNull LocalDateTime inDate, Vehicle vehicle, ParkingArea parkingArea) {
+
+    public ParkingRecord(LocalDateTime inDate, Vehicle vehicle, ParkingArea parkingArea) {
         this.inDate = inDate;
         this.vehicle = vehicle;
         this.parkingArea = parkingArea;
         this.fee = 0;
-        this.isParkingActive = true;
+        this.parkingActive = true;
     }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotNull
     private LocalDateTime inDate;
@@ -46,5 +48,5 @@ public class ParkingRecord {
 
     private double fee;
 
-    public boolean isParkingActive;
+    private boolean parkingActive;
 }

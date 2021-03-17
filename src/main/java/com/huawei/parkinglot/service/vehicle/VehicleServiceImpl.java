@@ -7,9 +7,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class VehicleServiceImpl {
+public class VehicleServiceImpl implements VehicleService {
 
-    List<ParkingRecord> getParkingDetails(Vehicle vehicle) {
+    public List<ParkingRecord> getParkingDetails(Vehicle vehicle) {
+
         return vehicle.getParkingRecords();
     }
 }

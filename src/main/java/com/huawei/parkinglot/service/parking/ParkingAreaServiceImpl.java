@@ -55,7 +55,7 @@ public class ParkingAreaServiceImpl implements ParkingAreaService {
     @Override
     public double getDailyIncomeOfParkingArea(Date date, Long id) {
         ParkingArea parkingArea = parkingAreaRepository.findById(id).orElseThrow(() -> ParkingAreaNotFoundException.createWith(id));
-        return parkingArea.getParkingRecords().stream().filter(e -> isSameDay(e.getInDate(),date)).map( e -> e.getFee()).reduce(0.0,Double::sum);
+        return parkingArea.getParkingRecords().stream() /* .filter(e -> isSameDay(e.getInDate(),date)) */ .map( e -> e.getFee()).reduce(0.0,Double::sum);
     }
 
     private boolean isSameDay(Date date1, Date date2) {

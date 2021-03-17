@@ -82,8 +82,6 @@ public class ParkingAreaServiceTest {
 
         assertThat(updated.getName()).isSameAs(parkingArea.getName());
 
-        //verify(parkingAreaRepository).save(parkingArea);
-
     }
 
     @Test
