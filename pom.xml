@@ -8,7 +8,7 @@
 		<version>2.3.5.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.huawei</groupId>
+	<groupId>com.burak</groupId>
 	<artifactId>parkinglot</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>parkinglot</name>
@@ -86,6 +86,12 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.21.0</version>
+				<configuration>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
